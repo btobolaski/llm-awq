@@ -80,7 +80,7 @@ def build_model_and_enc(model_path):
                 "OPTDecoderLayer", "LlamaDecoderLayer"]
         )
     else:  # fp16 to quantized
-        kwargs = {"device_map": "balanced", "torch_dtype": torch.float16}
+        kwargs = {"device_map": "auto", "max_memory": {0: "12GiB", "cpu": "40GiB"}, "torch_dtype": torch.float16, "offload_folder": "./offload"}
 
         model = AutoModelForCausalLM.from_pretrained(
             model_path, config=config, trust_remote_code=True, **kwargs)
