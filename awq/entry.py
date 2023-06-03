@@ -83,7 +83,7 @@ def build_model_and_enc(model_path):
         kwargs = {"device_map": "balanced", "torch_dtype": torch.float16}
 
         model = AutoModelForCausalLM.from_pretrained(
-            model_path, config=config, **kwargs)
+            model_path, config=config, trust_remote_code=True, **kwargs)
 
         if args.run_awq:
             awq_results = run_awq(
