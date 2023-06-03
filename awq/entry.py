@@ -62,8 +62,8 @@ def build_model_and_enc(model_path):
     print(f"* Building model {model_path}")
 
     # all hf model
-    config = AutoConfig.from_pretrained(model_path)
-    enc = AutoTokenizer.from_pretrained(model_path, use_fast=False)
+    config = AutoConfig.from_pretrained(model_path, trust_remote_code=True)
+    enc = AutoTokenizer.from_pretrained(model_path, use_fast=False, trust_remote_code=True)
 
     if args.load_quant:  # directly load quantized weights
         # no need to really load the fp16 weights... just to get the model structure
